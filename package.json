@@ -10,7 +10,6 @@
   "bin": {
     "gendiff": "bin/gendiff.js"
   },
-  
   "repository": {
     "type": "git",
     "url": "git+https://github.com/mavvery/frontend-project-46.git"
@@ -20,9 +19,9 @@
   "bugs": {
     "url": "https://github.com/mavvery/frontend-project-46/issues"
   },
- 
   "homepage": "https://github.com/mavvery/frontend-project-46#readme",
   "dependencies": {
+    "@jest/globals": "^29.0.3",
     "commander": "^9.4.0",
     "lodash": "^4.17.21"
   },
