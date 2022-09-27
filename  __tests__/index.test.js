@@ -14,9 +14,6 @@ const readFile = (file) => {
   return content;
 };
 
-const firstJSON = getFixturePath('file1path.json');
-const secondJSON = getFixturePath('file2path.json');
-
 const expectedJson = readFile('test1.txt').trim();
 
 test('test1', () => {
