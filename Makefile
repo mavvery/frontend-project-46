@@ -12,6 +12,6 @@ test:
 
 test-coverage:
 	npm test -- --coverage --coverageProvider=v8
-	
+
 make lint:
- npx eslint .
+	npx eslint .
