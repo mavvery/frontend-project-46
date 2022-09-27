@@ -13,3 +13,4 @@ program
     console.log(gendiff(filepath1, filepath2));
   });
 program.parse();
+
