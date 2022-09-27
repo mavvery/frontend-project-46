@@ -1,31 +1,36 @@
-name: GitHub Actions
+name: 'Githum actions'
 
-on: push
-
-env:
-  CI: true
+on:
+  - push
+  - pull_request
 
 jobs:
   build:
-    runs-on: macos-latest
+
+    runs-on:  ubuntu-latest
+
     strategy:
       matrix:
-        node-version: 18
+        node-version: [14.x]
+
     steps:
-      - uses: actions/checkout@v3
-      - name: Use Node.js 18
-        uses: actions/setup-node@v3
-        with:
-          node-version: 18
-          cache: 'npm'
-      - run: make install
-      - run: make test
-      - run: make lint
-      - name: Test & publish code coverage
+    - uses: actions/checkout@v2
+    - name: Use Node ${{ matrix.node }}
+      uses: actions/setup-node@v2
+      with:
+        node-version: ${{ matrix.node }}
+    - name: npm install
+      run: |
+        make install
+      env:
+        CI: true
+    - name: Run linter
+      run: |
+        make lint
+    - name: Test & publish code coverage
       uses: paambaati/codeclimate-action@v3.0.0
       env:
-        CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
+          CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
       with:
-        coverageCommand: make test-coverage
-        debug: true
-  
+          coverageCommand: make test-coverage
+          debug: true
