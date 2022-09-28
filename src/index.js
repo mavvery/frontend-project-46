@@ -1,5 +1,5 @@
 import { cwd } from 'node:process'; // process.cwd() получение текущего каталога
-import { readFileSync } from 'node:fs'; // читает файл и возыращает содержимое
+import { readFileSync } from 'node:fs'; // читает файл и возвращает содержимое
 import { resolve, extname } from 'node:path'; // path.resolve() последовательность пути в абсолютный путь
 import _ from 'lodash'; // sortBy, unik, isEqual
 import parsers from './parse.js';
