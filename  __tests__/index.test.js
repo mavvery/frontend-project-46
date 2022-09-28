@@ -15,7 +15,12 @@ const readFile = (file) => {
 };
 
 const expectedJson = readFile('test1.txt').trim();
+const expectedYml = readFile('test2.txt').trim();
 
 test('test1', () => {
   expect(genDiff('filepath1.json', 'filepath2.json')).toEqual(expectedJson);
+});
+
+test('test2', () => {
+  expect(genDiff('filepath1.yml', 'filepath2.yml')).toEqual(expectedYml);
 });

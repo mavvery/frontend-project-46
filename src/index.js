@@ -1,12 +1,11 @@
 import { cwd } from 'node:process'; // process.cwd() получение текущего каталога
 import { readFileSync } from 'node:fs'; // читает файл и возыращает содержимое
-import { resolve } from 'node:path'; // path.resolve() последовательность пути в абсолютный путь
+import { resolve, extname } from 'node:path'; // path.resolve() последовательность пути в абсолютный путь
 import _ from 'lodash'; // sortBy, unik, isEqual
+import parsers from './parse.js';
 
 const getFilePath = (filepath) => resolve(cwd(), '__fixtures__', filepath);
-const readFile = (path) => readFileSync(path, 'utf-8');
-
-const parsesFile = (file) => JSON.parse(file);
+const readFile = (path) => readFileSync(getFilePath(path, 'utf-8'));
 
 const getDiffInformation = (object1, object2) => {
   const keys1 = Object.keys(object1);
@@ -48,11 +47,16 @@ const getDiffInformation = (object1, object2) => {
   return result;
 };
 
-const gendiff = (filepath1, filepath2) => {
-  const file1 = readFile(getFilePath(filepath1));
-  const file2 = readFile(getFilePath(filepath2));
+const getFormat = (filepath) => extname(filepath).slice(1);
 
-  const InfotmationDiff = getDiffInformation(parsesFile(file1), parsesFile(file2));
+const gendiff = (filepath1, filepath2) => {
+  const readFile1 = readFile(filepath1);
+  const readFile2 = readFile(filepath2);
+
+  const file1 = parsers(readFile1, getFormat(filepath1));
+  const file2 = parsers(readFile2, getFormat(filepath2));
+
+  const InfotmationDiff = getDiffInformation(file1, file2);
 
   const result = InfotmationDiff.map((diff) => {
     const typeDiff = diff.type;
