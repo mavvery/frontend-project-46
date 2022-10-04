@@ -3,8 +3,7 @@ import { cwd } from 'node:process';
 import { resolve, extname } from 'node:path';
 import compareData from './compareData.js';
 import parsers from './parse.js';
-import buildTree from './formatters/stylish.js';
-// import getFormat from './formatters/index.js';
+import getFormatName from './formatters/index.js';
 
 const getFilePath = (filepath) => resolve(cwd(), '__fixtures__', filepath);
 const readFile = (path) => fs.readFileSync(getFilePath(path, 'utf-8'));
@@ -17,8 +16,9 @@ const gendiff = (filepath1, filepath2, formatName = 'stylish') => {
   const file1 = parsers(readFile1, getFormat(filepath1));
   const file2 = parsers(readFile2, getFormat(filepath2));
 
-  const differences = compareData(file1, file2, formatName);
-  return buildTree(differences);
+  const diff = compareData(file1, file2);
+  const selectOutputFormat = getFormatName(diff, formatName);
+  return selectOutputFormat;
 };
 
 export default gendiff;
