@@ -36,14 +36,14 @@ test('test4', () => {
   expect(genDiff('filepath1.yaml', 'filepath2.yaml', 'plain')).toEqual(expectedPlain);
 });
 
-test('test4', () => {
+test('test5', () => {
   expect(genDiff('filepath1.json', 'filepath2.json', 'plain')).toEqual(expectedPlain);
 });
 
-test('test5', () => {
+test('test6', () => {
   expect(genDiff('filepath1.json', 'filepath2.json', 'json')).toEqual(expectedJsonFormat);
 });
 
-test('test6', () => {
+test('test7', () => {
   expect(genDiff('filepath1.yml', 'filepath2.yml', 'json')).toEqual(expectedJsonFormat);
 });
